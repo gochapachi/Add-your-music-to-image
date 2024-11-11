@@ -4,15 +4,15 @@ services:
   app:
     build: .
     ports:
-      - "3021:3000"
+      - "3021:3021"  # Now the container uses 3021 internally as well
     volumes:
       - uploads:/app/uploads
     environment:
       - NODE_ENV=production
-      - PORT=3000
+      - PORT=3021  # Update the PORT environment variable
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      test: ["CMD", "curl", "-f", "http://localhost:3021"]  # Updated healthcheck for port 3021
       interval: 30s
       timeout: 10s
       retries: 3
